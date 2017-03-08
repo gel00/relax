@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body{
+        background: #1b1b1b;
+    }
+    #cont {
+        position: relative;
+
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+    .dot{
+        position: absolute;
+
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #7ecefd;
+        animation-name: loading;
+        animation-duration: 4s;
+    }
+    @keyframes loading {
+        from {transform: rotate(120deg);}
+        to {transform: rotate(0deg);}
+    }
+    #d0{
+        top: 0px;
+        left: 43px;
+    }
+    #d1 {
+        right: 12px;
+        top: 12px;
+    }
+    #d2 {
+        right: 0px;
+        top: 43px;
+    }
+    #d3 {
+        right: 12px;
+        bottom: 12px;
+    }
+    #d4 {
+        left: 43px;
+        bottom: 0px;
+    }
+    #d5 {
+        left: 12px;
+        bottom: 12px;
+    }
+    #d6 {
+        left: 0px;
+        top: 43px;
+    }
+    #d7 {
+        left: 12px;
+        top: 12px;
+    }
+    .o0{
+        opacity: 0.05;
+    }
+    .o1{
+        opacity: 0.171;
+    }
+    .o2{
+        opacity: 0.286;
+    }
+    .o3{
+        opacity: 0.428;
+    }
+    .o4{
+        opacity: 0.571;
+    }
+    .o5{
+        opacity: 0.714;
+    }
+    .o6{
+        opacity: 0.857;
+    }
+    .o7{
+        opacity: 1;
+    }
+</style>
+</head>
+<body>
+    <div id="cont">
+
+    </div>
+    <script>
+
+
+    var el = document.getElementById("cont"),
+        frame = 2,
+        speed = 6,
+        radius = 1,
+        i = 7,
+        loaded = false,
+        loadTime = 0;
+
+    var loadStart = setInterval(
+        function(){
+            var dot = document.createElement("DIV");
+            dot.id = "d"+i;
+            dot.className = "dot o"+i;
+            el.appendChild(dot);
+            i--;
+            if (i === -1) {
+                clearInterval(loadStart);
+            }
+        },200
+    );
+    function rotate(el) {
+
+    }
+    var rot = function() {
+        setTimeout(function(){
+            loadTime += speed;
+            if (!loaded || loadTime < 1000) {
+                radius = radius === 360? 1: radius+frame;
+                el.style.transform="rotate(" + radius + "deg)";
+                el.style.webkitTransform="rotate(" + radius + "deg)";
+                el.style.OTransform="rotate(" + radius + "deg)";
+                el.style.MozTransform="rotate(" + radius + "deg)";
+                rot();
+            }
+        },speed);
+    };
+   rot();
+    </script>
+</body>
+</html>
